@@ -59,3 +59,26 @@ app.delete('/wackRecord', function(req,res){
     }
   });
 });
+
+app.put('/updateRecord', function(req,res){
+  console.log('in updateRecord',req.body);
+  record.findById(req.body._id, function(err, rec){
+    if(err){
+      res.send(500);
+    }
+    else{
+      rec.artist = req.body.artist;
+      rec.imageUrl = req.body.imageUrl;
+      rec.name = req.body.name;
+      rec.releaseYear = req.body.releaseYear;
+      rec.save(function(err){
+        if(err){
+          res.send(500);
+        }
+        else{
+          res.send(200);
+        }
+      });
+    }
+  });
+});

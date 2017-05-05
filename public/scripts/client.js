@@ -7,6 +7,8 @@ function onReady(){
 $('#submitButton').on('click', addRecord);
 $(document).on('click', '#delete', deleteRecord);
 $(document).on('click', '#update', updateRecord);
+$(document).on('click', '#changed', changeRecord);
+
 grabRecord();
 
 
@@ -73,14 +75,19 @@ function deleteRecord(){
 }
 
 function updateRecord(){
-  $(this).parent().append("<p><input placeholder='artist' id='changedArtist'></p>");
-  $(this).parent().append("<p><input placeholder='album' id='changedAlbum'></p>");
-  $(this).parent().append("<p><input placeholder='year released' id='changedYear'></p>");
-  $(this).parent().append("<p><input placeholder='image url' id='changedImage'></p>");
-  $(this).parent().append("<button class='btn' id='changed'>Change</button>");
-
+  $(this).parent().append("<p><input placeholder='artist' id='changedArtist' val=''></p>");
+  $(this).parent().append("<p><input placeholder='album' id='changedAlbum' val=''></p>");
+  $(this).parent().append("<p><input placeholder='year released' id='changedYear' val=''></p>");
+  $(this).parent().append("<p><input placeholder='image url' id='changedImage' val=''></p>");
+  $(this).parent().append("<button class='btn' id='changed' data-id='"+$(this).data('id')+"' val=''>Change</button>");
+}
+function changeRecord(){
   var objectToSend = {
-
+    _id: $(this).data('id'),
+    artist: $('#changedArtist').val(),
+    imageUrl: $('#changedImage').val(),
+    name: $('#changedAlbum').val(),
+    releaseYear: $('#changedYear').val()
   };
   $.ajax({
     type: 'PUT',
@@ -88,6 +95,7 @@ function updateRecord(){
     data: objectToSend,
     success: function(response){
       console.log(response);
+      grabRecord();
     }
   });
 }
