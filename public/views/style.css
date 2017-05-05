@@ -4,8 +4,9 @@ body{
 }
 .jumbotron{
   background-image: url("http://brightoncentre.co.uk/media/1051/istock_000042260094small.jpg?crop=0,0.0412614205717654,0,0.42823460064839375&cropmode=percentage&width=1150&height=460&rnd=131221216910000000");
-  color: DarkGoldenRod;
-  text-shadow: 2px 2px black;
+  color: GoldenRod;
+  text-shadow: 5px 5px black;
+  background-size: cover;
 }
 h1{
   text-align: center;
@@ -20,7 +21,7 @@ h1{
   color: GoldenRod;
   text-shadow: 2px 2px black;
 }
-#delete{
+#delete, #changed {
   margin-right: 25px;
   color: black;
 }
@@ -31,7 +32,10 @@ h1{
 }
 
 #submitButton {
-  height: 30px;
+  height: 25px;
+  padding-bottom: 25px;
+  padding-top: 5px;
+  margin-left: 10px;
   color: black;
 }
 
@@ -41,4 +45,11 @@ h1{
 }
 input{
   color: black;
+}
+
+.audio {
+  text-align: center;
+}
+#outputDiv{
+  margin-left: 190px;
 }

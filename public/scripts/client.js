@@ -9,14 +9,22 @@ $('#submitButton').on('click', addRecord);
 $(document).on('click', '#delete', deleteRecord);
 $(document).on('click', '#update', updateRecord);
 $(document).on('click', '#changed', changeRecord);
+$(document).on('click', '#hide', grabRecord);
 
 grabRecord();
+
+$("#autoplay").get(0).play();
 
 
 }//end onReady
 
 
 function addRecord(){
+  if ($('#artistIn').val() === '' || $('#imageIn').val() === ''|| $('#albumIn').val() === ''|| $('#yearIn').val() === ''){
+    alert ('Please Enter a Non-Wack Album');
+  }
+
+  else {
   console.log('Record added');
   var objectToSend = {
     artist: $('#artistIn').val(),
@@ -31,9 +39,14 @@ function addRecord(){
     success: function(response){
       console.log('got it! I think.');
       grabRecord();
+
+      $('#artistIn').val('');
+      $('#imageIn').val('');
+      $('#albumIn').val('');
+      $('#yearIn').val('');
     }
   }); //end ajax
-
+}
 }//end addRecord
 
 function grabRecord() {
@@ -46,7 +59,7 @@ function grabRecord() {
       var outputDiv = $('#outputDiv');
       outputDiv.empty();
       for(var i=0; i<response.length; i++){
-        var textToAppend = '<div class="col-sm-3 col-xs-5" id="recordCase">';
+        var textToAppend = '<div class="col-sm-3 col-xs-3" id="recordCase">';
         textToAppend += '<img src="'+ response[i].imageUrl +'" data-url="'+ response[i].imageUrl+'" style="width:100%"/>';
         textToAppend += '<p id="artist">' + response[i].artist + '</p>';
         textToAppend += '<p id="name">' + response[i].name + '</p>';
@@ -84,7 +97,8 @@ function updateRecord(){
   parent.find("#updateDiv").append("<p><input id='changedAlbum' value='"+parent.find('#name').text()+"'></p>");
   parent.find("#updateDiv").append("<p><input id='changedYear' value='"+parent.find('#year').text()+"'></p>");
   parent.find("#updateDiv").append("<p><input id='changedImage' value='"+parent.find('img').data('url')+"'></p>");
-  parent.find("#updateDiv").append("<button class='btn' id='changed' data-id='"+$(this).data('id')+"' val=''>Change</button>");
+  parent.find("#updateDiv").append("<button class='btn' id='changed' data-id='"+$(this).data('id')+"' >Change</button>");
+  parent.find("#updateDiv").append("<button class='btn' id='hide' >Hide</button>");
 }
 function changeRecord(){
   var objectToSend = {
