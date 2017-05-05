@@ -1,0 +1,10 @@
+body{
+  background-color: DimGray;
+}
+.jumbotron{
+  background-color: honeydew;
+}
+#recordCase{
+  margin-right: 20px;
+  padding: 10px;
+}
